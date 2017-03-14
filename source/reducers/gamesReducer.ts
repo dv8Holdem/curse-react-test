@@ -14,12 +14,17 @@ export function gamesReducer(state: GamesState = initialState, action: Actions) 
     switch (action.type) {
         case FETCH_GAMES_STARTED:
             // Handle action
+            console.log('FETCH_GAMES_STARTED', action)
             break;
         case FETCH_GAMES_FAILED:
             // Handle action
+            console.log('FETCH_GAMES_FAILED', action)
+
             break;
         case FETCH_GAMES_SUCCEEDED:
             // Handle action
+            console.log('FETCH_GAMES_SUCCEEDED', action)
+
             break;
     }
 

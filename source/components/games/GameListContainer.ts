@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-
+import { fetchGames } from '../../actions/games'
 import { GameList, GameListProps, ConnectedProps, ConnectedDispatch } from './GameList';
 import { GlobalState } from '../../state/GlobalState';
-
+import {gamesReducer} from '../../reducers/gamesReducer'
 function mapStateToProps(state: GlobalState, props: GameListProps): ConnectedProps {
     return {
-
+    	games: state.games
     }
 };
 
 function mapDispatchToProps(dispatch: Dispatch<any>): ConnectedDispatch {
     return bindActionCreators({ 
-        
+        getGames: fetchGames
     }, dispatch);
 };
 
