@@ -8,6 +8,9 @@ type Actions = FetchGamesStarted | FetchGamesSucceeded | FetchGamesFailed;
 
 const initialState: GamesState = {
     games: [],
+    isFetching:false,
+    error:"",
+    isLoaded:false
 };
 
 export function gamesReducer(state: GamesState = initialState, action: Actions) {
@@ -15,18 +18,28 @@ export function gamesReducer(state: GamesState = initialState, action: Actions) 
         case FETCH_GAMES_STARTED:
             // Handle action
             console.log('FETCH_GAMES_STARTED', action)
-            break;
+            return Object.assign({}, state, {
+                isFetching: action.isFetching
+            })
+
+        
         case FETCH_GAMES_FAILED:
             // Handle action
             console.log('FETCH_GAMES_FAILED', action)
-
-            break;
+            return Object.assign({}, state, {
+                isFetching: action.isFetching,
+                error: action.error
+            })
+        
         case FETCH_GAMES_SUCCEEDED:
             // Handle action
             console.log('FETCH_GAMES_SUCCEEDED', action)
-
-            break;
+              return Object.assign({}, state, {
+                isFetching: action.isFetching,
+                games:action.games.data,
+                isLoaded: true
+              })
     }
-
+    console.log('state :', state)
     return state;
 }

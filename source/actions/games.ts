@@ -43,18 +43,21 @@ export function fetchGames() {
     return (dispatch: Redux.Dispatch<any>, getState: GlobalStateGetter) => {
         console.log("fetchGames()")
         dispatch(fetchGamesStarted());
-        fetch('https://clientupdate-v6.cursecdn.com/Feed/games/v10/games.json')
-            .then((response)=>{
-                if(!response.ok){
-                    //throw error
-                    console.log('!response.ok')
-                    throw Error(response.statusText)
-                }
+        setTimeout(()=>{
+            fetch('https://clientupdate-v6.cursecdn.com/Feed/games/v10/games.json')
+                .then((response)=>{
+                    if(!response.ok){
+                        //throw error
+                        console.log('!response.ok')
+                        throw Error(response.statusText)
+                    }
 
-                return response;
-            })
-            .then((response) => response.json())
-            .then((games) => dispatch(fetchGamesSucceeded(games)))
-            .catch((error)=> dispatch(fetchGamesFailed(error)))
+                    return response;
+                })
+                .then((response) => response.json())
+                .then((games) => dispatch(fetchGamesSucceeded(games)))
+                .catch((error)=> dispatch(fetchGamesFailed(error)))            
+        },5000)
+
     };
 }
