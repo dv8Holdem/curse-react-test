@@ -7,7 +7,6 @@ export interface GameDetailsProps extends React.Props<GameDetails> {
 }
 
 export interface ConnectedProps {
-    // Define any connected props here. (The ones mapped by ListContainer.)
     games: Object,
     isFetching: boolean,
     error: string,
@@ -16,45 +15,40 @@ export interface ConnectedProps {
 }
 
 export interface ConnectedDispatch {
-    // Define any connected dispatch actions here. (The ones mapped by ListContainer.)
-    getGames:(),
-    isFetching:()
+    getGames:()=>void,
+    isFetching:()=>void,
+    getGameDetails:()=>void
 }
 type CombinedTypes = GameDetailsProps & ConnectedProps & ConnectedDispatch;
 
 export class GameDetails extends React.Component<CombinedTypes, void> {
     componentDidMount() {
         if(this.props.isLoaded){
-            console.log("no games")
-            this.getDetails()
+            this.props.getGameDetails(this.props.params.id);
         }else{
-            console.log("no games else")
-
             this.props.getGames().then(()=>{
-                this.getDetails()
-            })       
+                this.props.getGameDetails(this.props.params.id);
+                console.log('this.props.selectedGame', this.props)
+            });
         }
-	    console.log("this.props.params:", this.props);
-        var id=this.props.params.id;
-        let game = _.find(this.props.games, function(game) { return game.ID == id; });
-        console.log("game : ", game)
 
     }
     
-    getDetails(){
-        var id=this.props.params.id;
-        let game = _.find(this.props.games, function(game) { return game.ID == id; });
-    }
-
     render() {
+        if(this.props.selectedGame !=null){
+            return (
+                <div className='GameDetails--root'>
+                    Game Details for {this.props.selectedGame.Name}
+                </div>
+
+            );
+        }
+
         return (
             <div className='GameDetails--root'>
-				Game Details
+                Error
             </div>
 
-
-
-            }
         );
     }
 } 

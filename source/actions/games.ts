@@ -43,21 +43,56 @@ export function fetchGames() {
     return (dispatch: Redux.Dispatch<any>, getState: GlobalStateGetter) => {
         console.log("fetchGames()")
         dispatch(fetchGamesStarted());
-        setTimeout(()=>{
-            fetch('https://clientupdate-v6.cursecdn.com/Feed/games/v10/games.json')
-                .then((response)=>{
-                    if(!response.ok){
-                        //throw error
-                        console.log('!response.ok')
-                        throw Error(response.statusText)
-                    }
+        return fetch('https://clientupdate-v6.cursecdn.com/Feed/games/v10/games.json')
+            .then((response)=>{
+                if(!response.ok){
+                    //throw error
+                    console.log('!response.ok')
+                    throw Error(response.statusText)
+                }
 
-                    return response;
-                })
-                .then((response) => response.json())
-                .then((games) => dispatch(fetchGamesSucceeded(games)))
-                .catch((error)=> dispatch(fetchGamesFailed(error)))            
-        },5000)
+                return response;
+            })
+            .then((response) => response.json())
+            .then((games) => dispatch(fetchGamesSucceeded(games)))
+            .catch((error)=> dispatch(fetchGamesFailed(error)))
+    };
+}
 
+//Get Game Details
+
+//Get Games Details Error
+export type GET_GAME_DETAIL_FAILED = 'GET_GAME_DETAIL_FAILED';
+export const GET_GAME_DETAIL_FAILED: GET_GAME_DETAIL_FAILED = 'GET_GAME_DETAIL_FAILED';
+export type GetGameDetailFailed = {
+    type: GET_GAME_DETAIL_FAILED,
+    error: string
+};
+
+function GetGameDetailFailed(error:string): GET_GAME_DETAIL_FAILED { 
+    return { type: GET_GAME_DETAIL_FAILED, error };
+}
+
+//Get Games Details Succeeded
+export type GET_GAME_DETAIL_SUCCEEDED = 'GET_GAME_DETAIL_SUCCEEDED';
+export const GET_GAME_DETAIL_SUCCEEDED: GET_GAME_DETAIL_SUCCEEDED = 'GET_GAME_DETAIL_SUCCEEDED';
+export type GetGameDetailSucceeded = {
+    type: GET_GAME_DETAIL_SUCCEEDED,
+    selectedGame: Object
+};
+
+function GetGameDetailSucceeded(game): GET_GAME_DETAIL_SUCCEEDED { 
+    return { type: GET_GAME_DETAIL_SUCCEEDED, game };
+}
+
+export function getGameDetails(id) {
+    return (dispatch: Redux.Dispatch<any>, getState: GlobalStateGetter) => {
+        let game = _.find(getState().games.games, function(game) { return game.ID == id; });
+        if (game){
+            dispatch(GetGameDetailSucceeded(game));
+        }else{
+            let error = "Game Not Found";
+            dispatch(GetGameDetailFailed(error)); 
+        }
     };
 }

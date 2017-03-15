@@ -16,8 +16,8 @@ export interface ConnectedProps {
 
 export interface ConnectedDispatch {
     // Define any connected dispatch actions here. (The ones mapped by ListContainer.)
-    getGames:()=>void,
-    isFetching:()=> void
+    getGames:(),
+    isFetching:()
 }
 
 type CombinedTypes = GameListProps & ConnectedProps & ConnectedDispatch;
@@ -35,12 +35,10 @@ export class GameList extends React.Component<CombinedTypes, void> {
 
     }
     viewDetails(gameID:string){
-      console.log("this.context", this.context)
       this.context.router.push('game/'+gameID);
     }
 
     render() {
-        console.log('this.props.games 1:', this.props);
         if(this.props.isFetching){
             return <p>Loading</p>;
         }
@@ -79,10 +77,6 @@ export class GameList extends React.Component<CombinedTypes, void> {
                 <h1>Curse React Test Error </h1>
                 <p>An error has occurred</p>
             </div>
-
-
-
-            }
         );
     }
 } 
