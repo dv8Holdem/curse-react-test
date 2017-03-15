@@ -11,7 +11,9 @@ function mapStateToProps(state: GlobalState, props: GameListProps): ConnectedPro
     return {
     	games: state.games.games,
     	isFetching: state.games.isFetching,
-    	isLoaded: state.games.isLoaded
+    	isLoaded: state.games.isLoaded,
+    	error:state.games.error,
+    	selectedGame:state.games.selectedGame
     }
 };
 

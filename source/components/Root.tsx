@@ -14,7 +14,6 @@ export class Root extends React.Component<void, void> {
                     <Route path='/' component={App}>
                         <IndexRoute component={GameListContainer} />
                         <Route path = "game/:id" component={GameDetailsContainer}></Route>
-
                     </Route>
 
                 </Router>

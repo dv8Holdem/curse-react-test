@@ -5,4 +5,5 @@ export interface GamesState {
     isFetching: boolean
     error: string
     isLoaded: boolean
+    selectedGame: Object
 }

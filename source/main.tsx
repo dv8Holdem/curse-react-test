@@ -7,5 +7,3 @@ initGlobals();
 
 import { Root } from './components/Root';
 ReactDOM.render(<Root />, document.getElementById('app'));
-
-console.info('Initialized ventura.');
