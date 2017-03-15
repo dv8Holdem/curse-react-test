@@ -6,7 +6,7 @@ import {
     GET_GAME_DETAIL_SUCCEEDED, GET_GAME_DETAIL_FAILED
 } from '../actions/games';
 
-type Actions = FetchGamesStarted | FetchGamesSucceeded | FetchGamesFailed;
+type Actions = FetchGamesStarted | FetchGamesSucceeded | FetchGamesFailed | GetGameDetailSuceeded | GetGamesDetailFailed;
 
 const initialState: GamesState = {
     games: [],
@@ -31,16 +31,16 @@ export function gamesReducer(state: GamesState = initialState, action: Actions) 
             })
         
         case FETCH_GAMES_SUCCEEDED:
-              return Object.assign({}, state, {
+            return Object.assign({}, state, {
                 isFetching: action.isFetching,
                 games:action.games.data,
                 isLoaded: true
-              })
+            })
 
         case GET_GAME_DETAIL_SUCCEEDED:
-              return Object.assign({}, state, {
-                  selectedGame: action.game;
-              })
+            return Object.assign({}, state, {
+                selectedGame: action.game
+            })
 
         case GET_GAME_DETAIL_FAILED:
             return Object.assign({}, state, {

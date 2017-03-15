@@ -1,23 +1,24 @@
 //game details
 import * as React from 'react';
 import { Link } from 'react-router';
-import lodash from 'lodash';
+import {lodash} from 'lodash';
+import {Game} from '../../models/Game';
 export interface GameDetailsProps extends React.Props<GameDetails> {
     // Define any props taken by List itself.
 }
 
 export interface ConnectedProps {
-    games: Object,
+    games: Array<Game>,
     isFetching: boolean,
     error: string,
     isLoaded: boolean,
-    selectedGame: Object
+    selectedGame: Game
 }
 
 export interface ConnectedDispatch {
     getGames:()=>void,
     isFetching:()=>void,
-    getGameDetails:()=>void
+    getGameDetails:(id:string)=>void
 }
 type CombinedTypes = GameDetailsProps & ConnectedProps & ConnectedDispatch;
 

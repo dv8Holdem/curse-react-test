@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Router } from 'react-router';
-import lodash from 'lodash';
+import {lodash} from 'lodash';
+import {Game} from '../../models/Game';
 export interface GameListProps extends React.Props<GameList> {
     // Define any props taken by List itself.
 }
@@ -16,8 +17,8 @@ export interface ConnectedProps {
 
 export interface ConnectedDispatch {
     // Define any connected dispatch actions here. (The ones mapped by ListContainer.)
-    getGames:(),
-    isFetching:()
+    getGames:()=>void,
+    isFetching:()=>void
 }
 
 type CombinedTypes = GameListProps & ConnectedProps & ConnectedDispatch;
@@ -56,7 +57,7 @@ export class GameList extends React.Component<CombinedTypes, void> {
                       </tr>
                   </thead>
                   <tbody>
-                    {this.props.games.map((game) => (
+                    {this.props.games.map((game:Game) => (
                       
                         <tr key={game.ID} onClick={()=>this.viewDetails(game.ID)}>
                           <td>{game.ID}</td>

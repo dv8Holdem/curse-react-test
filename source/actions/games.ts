@@ -1,4 +1,5 @@
 import { GlobalStateGetter } from "../state/GlobalState";
+import {Game} from '../models/Game';
 
 // Fetch Games Started
 export type FETCH_GAMES_STARTED = 'FETCH_GAMES_STARTED';
@@ -81,11 +82,11 @@ export type GetGameDetailSucceeded = {
     selectedGame: Object
 };
 
-function GetGameDetailSucceeded(game): GET_GAME_DETAIL_SUCCEEDED { 
+function GetGameDetailSucceeded(game: Game): GET_GAME_DETAIL_SUCCEEDED { 
     return { type: GET_GAME_DETAIL_SUCCEEDED, game };
 }
 
-export function getGameDetails(id) {
+export function getGameDetails(id: string) {
     return (dispatch: Redux.Dispatch<any>, getState: GlobalStateGetter) => {
         let game = _.find(getState().games.games, function(game) { return game.ID == id; });
         if (game){
