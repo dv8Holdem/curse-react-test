@@ -1,3 +1,9 @@
+#TODO
+Sort the game list by OrderId
+Do the UI
+Update Game object
+Try to fix the errors in console
+
 # Curse React Test
 
 The purpose of this test is to evaluate your skill as developer. It should take you about 2 hours to complete, although you may take more time if you wish.

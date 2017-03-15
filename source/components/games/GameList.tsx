@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Router } from 'react-router';
 import {lodash} from 'lodash';
 import {Game} from '../../models/Game';
+import { FormControl } from 'react-bootstrap';
+
 export interface GameListProps extends React.Props<GameList> {
 
 }
@@ -71,7 +73,7 @@ export class GameList extends React.Component<CombinedTypes, void> {
 
         if(this.props.isLoaded){
             return <div className='GameList--root'>
-                <input type="text" value={this.state.searchQuery} onChange={this.onSearchInputChange} />
+                <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
                 <table>
                     <thead>
                         <tr>
@@ -95,8 +97,9 @@ export class GameList extends React.Component<CombinedTypes, void> {
 
                     ))}                  
                     </tbody>
-                </table>
+                </table>                    
             </div> 
+
         }
         return (
             <div className='GameList--root'>

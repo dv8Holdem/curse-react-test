@@ -1,16 +1,16 @@
 import * as React from 'react';
+import { Well } from 'react-bootstrap';
 
 export class App extends React.Component<void, void> {
     render() {
         return (
-        	
-            <div>
+            <div class="wrapper">
             	<header>Header</header>
-                <div>{this.props.children}</div>
-                <footer>footer</footer>
+                <main id="main-content">
+                    {this.props.children}
+                </main>
+                <footer></footer>
             </div>
-
-
         );
     }
 }

@@ -3,11 +3,16 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i');
 
 // Global styles
-
+*{
+	margin:0;
+	padding:0;
+}
 body {
     font-family: 'Open Sans';
     font-size: 14px;
     background: #efefef;
+    display: flex;
+    flex-direction: column;
 }
 
 h1, h2 {
@@ -15,5 +20,23 @@ h1, h2 {
 }
 
 // Component imports
+header{
+	width:100%;
+	height:50px;
+	background:#000;
+}
+footer{
+	width:100%;
+	height:30px;
+	background:#CCC;
+    text-align:center
+}
 
+#main-content{
+	width:1080px;
+	margin:0 auto;
+    padding:25px;
+    background:#eee;
+    min-height: calc(100vh - 80px);
+}
 @import '../components/games/GameList';
