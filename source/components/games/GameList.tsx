@@ -77,7 +77,6 @@ export class GameList extends React.Component<CombinedTypes, void> {
         if(this.props.isLoaded){
             return <div className='GameList--root'>
                 <Panel>
-                    <ControlLabel>Search Games</ControlLabel>
                     <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
                 </Panel>
 
@@ -88,7 +87,7 @@ export class GameList extends React.Component<CombinedTypes, void> {
                                 
                             
                             <Panel header={game.Name} bsSize="sm" onClick={()=>this.viewDetails(game.ID)}>
-                                <img src="https://clientupdate-v6.cursecdn.com/GameAssets/1/Icon64.png" />
+                                <img src={"https://clientupdate-v6.cursecdn.com/GameAssets/"+game.ID+"/Icon64.png"} />
                                 <ul>
                                     <li><Glyphicon glyph={game.SupportsAddons ? 'ok-circle' : 'remove-circle'}/> Addon Supported </li>
                                     <li><Glyphicon glyph={game.SupportsVoice ? 'ok-circle' : 'remove-circle'}/> Voice Supported </li>
