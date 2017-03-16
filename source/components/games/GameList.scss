@@ -2,6 +2,51 @@
 
 // Placeholder styling for welcome.
 .GameList--root {
-    text-align: center;
     margin-top: 30px;
+    .panel-heading{
+        background: #000!important;
+        color:#FFF !important;
+    }
+}
+
+.game-panel-wrapper{
+	width:292px;
+	height:165px;
+	float:left;
+    margin: 0 10px 5px 0;
+    cursor: pointer
+}
+
+#game-list-container{
+    .panel-heading{
+        background: #f16436 !important;
+        color:#FFF !important;
+        font-weight: 700;
+    }
+    .panel-body{
+        background:#F5F5F5;
+        img{
+            float:left;
+            margin-right:15px
+        }
+        h5{
+            margin:5px 0 5px 0;
+        }
+        .glyphicon-ok-circle{
+            color:green;
+        }
+        .glyphicon-remove-circle{
+            color:red;
+        }
+        li{
+            list-style:none;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 5px 0 0 10px;
+            span{
+                font-size:25px;
+                vertical-align: middle;
+            }
+        }
+    }    
 }

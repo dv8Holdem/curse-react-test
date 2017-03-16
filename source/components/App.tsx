@@ -7,7 +7,6 @@ export class App extends React.Component<void, void> {
 			<div>
 				<header>
 					<div className="header-wrapper">
-				   	<h1></h1>
 				   	<h4>Curse Redux Test</h4>
 				   	</div>
 				</header>

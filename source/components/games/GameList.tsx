@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Router } from 'react-router';
-import {lodash} from 'lodash';
-import {Game} from '../../models/Game';
+import { lodash } from 'lodash';
+import { Game } from '../../models/Game';
 import { FormControl } from 'react-bootstrap';
 import { Panel } from 'react-bootstrap';
 import { Well} from 'react-bootstrap';
+import { ControlLabel} from 'react-bootstrap';
+import { Glyphicon} from 'react-bootstrap';
+import { Config } from "../../models/Config";
 
 export interface GameListProps extends React.Props<GameList> {
 
@@ -50,8 +53,6 @@ export class GameList extends React.Component<CombinedTypes, void> {
             searchQuery:event.target.value,
             currentList:newList
         })
-
-        console.log('this.state:', this.state)
     }
 
     componentDidMount() {
@@ -75,17 +76,29 @@ export class GameList extends React.Component<CombinedTypes, void> {
 
         if(this.props.isLoaded){
             return <div className='GameList--root'>
-                <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
+                <Panel>
+                    <ControlLabel>Search Games</ControlLabel>
+                    <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
+                </Panel>
 
-                    {this.state.currentList.map((game:Game) => (
-                <Well bsSize="sm" onClick={()=>this.viewDetails(game.ID)} key={game.ID}>
-                  {game.ID}
-                  {game.Name}
-                            {game.SupportsAddons.toString()}
-                            {game.SupportsVoice.toString()}
+                <Panel header="Games" >
+                    <div id="game-list-container">
+                        {this.state.currentList.map((game:Game) => (
+                            <div className="game-panel-wrapper" key={game.ID}>
+                                
+                            
+                            <Panel header={game.Name} bsSize="sm" onClick={()=>this.viewDetails(game.ID)}>
+                                <img src="https://clientupdate-v6.cursecdn.com/GameAssets/1/Icon64.png" />
+                                <ul>
+                                    <li><Glyphicon glyph={game.SupportsAddons ? 'ok-circle' : 'remove-circle'}/> Addon Supported </li>
+                                    <li><Glyphicon glyph={game.SupportsVoice ? 'ok-circle' : 'remove-circle'}/> Voice Supported </li>
+                                </ul>
+                            </Panel>
+                            </div>
 
-                </Well>
-                    ))}                  
+                        ))}
+                    </div>
+                </Panel>              
             </div> 
 
         }
@@ -97,4 +110,4 @@ export class GameList extends React.Component<CombinedTypes, void> {
             </div>
         );
     }
-} 
+}
