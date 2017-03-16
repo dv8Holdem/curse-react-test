@@ -3,6 +3,8 @@ import { Router } from 'react-router';
 import {lodash} from 'lodash';
 import {Game} from '../../models/Game';
 import { FormControl } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
+import { Well} from 'react-bootstrap';
 
 export interface GameListProps extends React.Props<GameList> {
 
@@ -74,30 +76,16 @@ export class GameList extends React.Component<CombinedTypes, void> {
         if(this.props.isLoaded){
             return <div className='GameList--root'>
                 <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Game</th>
-                            <th>Game Id</th>
-                            <th>Game Name</th>
-                            <th>Support Addons</th>
-                            <th>Support Voice</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+
                     {this.state.currentList.map((game:Game) => (
+                <Well bsSize="sm" onClick={()=>this.viewDetails(game.ID)} key={game.ID}>
+                  {game.ID}
+                  {game.Name}
+                            {game.SupportsAddons.toString()}
+                            {game.SupportsVoice.toString()}
 
-                        <tr key={game.ID} onClick={()=>this.viewDetails(game.ID)}>
-                            <td>{game.ID}</td>
-                            <td>{game.ID}</td>
-                            <td>{game.Name}</td>
-                            <td>{game.SupportsAddons.toString()}</td>
-                            <td>{game.SupportsVoice.toString()}</td>
-                        </tr>
-
+                </Well>
                     ))}                  
-                    </tbody>
-                </table>                    
             </div> 
 
         }
