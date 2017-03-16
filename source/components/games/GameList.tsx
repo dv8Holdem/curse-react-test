@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Router } from 'react-router';
 import { lodash } from 'lodash';
 import { Game } from '../../models/Game';
-import { FormControl } from 'react-bootstrap';
-import { Panel } from 'react-bootstrap';
-import { Well} from 'react-bootstrap';
-import { ControlLabel} from 'react-bootstrap';
-import { Glyphicon} from 'react-bootstrap';
+import { FormControl, Panel, Well, ControlLabel, Glyphicon } from 'react-bootstrap';
 import { Config } from "../../models/Config";
+import Spinner from "../spinner/Spinner";
+import ErrorMessage from "../error-message/ErrorMessage";
+
+
 
 export interface GameListProps extends React.Props<GameList> {
 
@@ -71,41 +71,39 @@ export class GameList extends React.Component<CombinedTypes, void> {
 
     render() {
         if(this.props.isFetching){
-            return <p>Loading</p>;
+            return (
+                <Spinner/>
+            )
         }
+
 
         if(this.props.isLoaded){
-            return <div className='GameList--root'>
-                <Panel>
-                    <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
-                </Panel>
+            return (
+                <div className='GameList--root'>
+                    <Panel>
+                        <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
+                    </Panel>
 
-                <Panel header="Games" >
-                    <div id="game-list-container">
-                        {this.state.currentList.map((game:Game) => (
-                            <div className="game-panel-wrapper" key={game.ID}>
-                                
-                            
-                            <Panel header={game.Name} bsSize="sm" onClick={()=>this.viewDetails(game.ID)}>
-                                <img src={"https://clientupdate-v6.cursecdn.com/GameAssets/"+game.ID+"/Icon64.png"} />
-                                <ul>
-                                    <li><Glyphicon glyph={game.SupportsAddons ? 'ok-circle' : 'remove-circle'}/> Addon Supported </li>
-                                    <li><Glyphicon glyph={game.SupportsVoice ? 'ok-circle' : 'remove-circle'}/> Voice Supported </li>
-                                </ul>
-                            </Panel>
-                            </div>
-
-                        ))}
-                    </div>
-                </Panel>              
-            </div> 
-
-        }
+                    <Panel header="Games" >
+                        <div id="game-list-container">
+                            {this.state.currentList.map((game:Game) => (
+                                <div className="game-panel-wrapper" key={game.ID}>
+                                    <Panel header={game.Name} bsSize="sm" onClick={()=>this.viewDetails(game.ID)}>
+                                        <img src={"https://clientupdate-v6.cursecdn.com/GameAssets/"+game.ID+"/Icon64.png"} />
+                                        <ul>
+                                            <li><Glyphicon glyph={game.SupportsAddons ? 'ok-circle' : 'remove-circle'}/> Addon Supported </li>
+                                            <li><Glyphicon glyph={game.SupportsVoice ? 'ok-circle' : 'remove-circle'}/> Voice Supported </li>
+                                        </ul>
+                                    </Panel>
+                                </div>
+                            ))}
+                        </div>
+                    </Panel> 
+                </div> 
+        })
         return (
             <div className='GameList--root'>
-                <img src="/assets/images/flame.png" />
-                <h1>Curse React Test Error </h1>
-                <p>An error has occurred</p>
+                <ErrorMessage />
             </div>
         );
     }

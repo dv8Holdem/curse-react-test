@@ -1,8 +1,8 @@
 #TODO
 Sort the game list by OrderId
-Do the UI
 Update Game object
 Try to fix the errors in console
+Use config file for URL of the json file
 
 # Curse React Test
 

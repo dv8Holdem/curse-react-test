@@ -2,7 +2,7 @@
 
 // Placeholder styling for welcome.
 .GameList--root {
-    margin-top: 30px;
+    //margin-top: 30px;
     .panel-heading{
         background: #000!important;
         color:#FFF !important;
@@ -17,7 +17,7 @@
     cursor: pointer
 }
 
-#game-list-container{
+#game-list-container, .GameDetails--root{
     .panel-heading{
         background: #f16436 !important;
         color:#FFF !important;
@@ -42,11 +42,29 @@
             list-style:none;
             font-size: 14px;
             font-weight: bold;
-            margin: 5px 0 0 10px;
+            margin: 5px 0 0 0px;
             span{
                 font-size:25px;
                 vertical-align: middle;
             }
         }
     }    
+}
+.GameDetails--root{
+    .well{
+        background:#fff !important;
+    }
+    .cat-file-list{
+
+        li{
+            list-style-type: disc !important;
+            margin:10px 0 0 10px;
+            font-weight: normal !important;
+        }
+    }
+}
+
+.errorContainer{
+    text-align: center;
+    margin-top: calc(100vh/2 - 280px);
 }
