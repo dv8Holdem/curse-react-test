@@ -6,7 +6,8 @@ render() {
         <div>
             <header>
                 <div className="header-wrapper">
-                    <h4>Curse Redux Test</h4>
+                    <img src="/assets/images/logo.png" />
+                    <h4>Curse-React-Test</h4>
                 </div>
             </header>
             <main id="main-content">

@@ -23,7 +23,7 @@ h1, h2 {
 header{
 	min-width:980px ;
 	height:70px;
-	background:#000;
+	background:#1E1E1E;
 	border-bottom:1px solid #f16436;
 	h1,h4{
 		margin:0;
@@ -36,11 +36,16 @@ header{
 	}
 
 	h4{
-		color:#FFF
+		color:#FFF;
+		float: right;
+		margin:23px 10px 0 0;
+
+
 	}
     .header-wrapper{
         width:980px;
-        margin: 0 auto
+        margin: 0 auto;
+
     }
 }
 

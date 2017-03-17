@@ -6,8 +6,7 @@ import { FormControl, Panel, Well, ControlLabel, Glyphicon } from 'react-bootstr
 import { Config } from "../../models/Config";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../error-message/ErrorMessage";
-
-
+import { fetchGames, FetchGamesSucceeded } from '../../actions/games'
 
 export interface GameListProps extends React.Props<GameList> {
 
@@ -27,14 +26,13 @@ export interface ConnectedProps {
 }
 
 export interface ConnectedDispatch {
-    getGames:(),
-    isFetching:()
+    getGames:()=>Promise<FetchGamesSucceeded>
 }
 
 type CombinedTypes = GameListProps & ConnectedProps & ConnectedDispatch;
 
 export class GameList extends React.Component<CombinedTypes, GameListState> {
-    constructor(props){
+    constructor(props:any){
         super(props);
         this.state = {
             searchQuery: '',
@@ -105,6 +103,7 @@ export class GameList extends React.Component<CombinedTypes, GameListState> {
                         </div>
                     </Panel> 
                 </div> 
+            )
         })
         return (
             <div className='GameList--root'>

@@ -2,11 +2,11 @@ import { GamesState } from "../state/GamesState";
 import { 
     FetchGamesStarted, FetchGamesSucceeded, FetchGamesFailed,
     FETCH_GAMES_STARTED, FETCH_GAMES_SUCCEEDED, FETCH_GAMES_FAILED,
-    GetGameDetailSuceeded, GetGamesDetailFailed,
+    GetGameDetailSucceeded, GetGameDetailFailed,
     GET_GAME_DETAIL_SUCCEEDED, GET_GAME_DETAIL_FAILED
 } from '../actions/games';
 
-type Actions = FetchGamesStarted | FetchGamesSucceeded | FetchGamesFailed | GetGameDetailSuceeded | GetGamesDetailFailed;
+type Actions = FetchGamesStarted | FetchGamesSucceeded | FetchGamesFailed | GetGameDetailSucceeded | GetGameDetailFailed;
 
 const initialState: GamesState = {
     games: [],
@@ -39,7 +39,7 @@ export function gamesReducer(state: GamesState = initialState, action: Actions) 
 
         case GET_GAME_DETAIL_SUCCEEDED:
             return Object.assign({}, state, {
-                selectedGame: action.game
+                selectedGame: action.selectedGame
             })
 
         case GET_GAME_DETAIL_FAILED:

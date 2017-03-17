@@ -12,6 +12,7 @@ import ErrorMessage from '../error-message/ErrorMessage';
 
 export interface GameDetailsProps extends React.Props<GameDetails> {
     // Define any props taken by List itself.
+    params: any
 }
 
 export interface ConnectedProps {
@@ -23,9 +24,9 @@ export interface ConnectedProps {
 }
 
 export interface ConnectedDispatch {
-    getGames:()=>void,
-    isFetching:()=>void,
-    getGameDetails:(id:string)=>void
+    getGames:()=>any,
+    isFetching:boolean,
+    getGameDetails:(id:string)=>Game
 }
 type CombinedTypes = GameDetailsProps & ConnectedProps & ConnectedDispatch;
 
