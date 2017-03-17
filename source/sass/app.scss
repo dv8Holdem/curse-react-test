@@ -19,6 +19,14 @@ h1, h2 {
     font-weight: normal;
 }
 
+a{
+    color:#000!important;
+}
+
+a:hover{
+    color:#f16436 !important;
+    text-decoration: none !important;
+}
 
 header{
 	min-width:980px ;
@@ -34,18 +42,49 @@ header{
 		width:10px;
 		background:#FFF;
 	}
-
-	h4{
-		color:#FFF;
-		float: right;
-		margin:23px 10px 0 0;
-
-
-	}
     .header-wrapper{
         width:980px;
         margin: 0 auto;
+    }
 
+    .logo-container{
+        float:left;
+        h4{
+            color:#f16436;
+            margin:-10px 0 0 55px;
+        }
+    }
+    nav{
+        float:right;
+        color:#fff;
+        font-size: 12px;
+        margin: 40px 5px 0 0;
+
+        ul{
+            list-style-type:none;
+            li{
+                display: inline-block;
+                margin:5px;
+            }.glyphicon:after{
+                font-family: 'Open Sans' !important;
+
+            }
+            li.nav-home-link .glyphicon:after{
+                content:' Home'
+            }
+            li.games-home-link .glyphicon:after{
+                content:' Games'
+            }
+            .divider:after{
+                content: '|'
+            }
+            a{
+                color:#F5F5F5!important;
+            }
+        }
+        .nav-active-link{
+            color:#f16436 !important; 
+        }
     }
 }
 

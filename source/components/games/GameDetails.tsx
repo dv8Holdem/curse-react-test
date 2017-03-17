@@ -25,7 +25,7 @@ export interface ConnectedProps {
 
 export interface ConnectedDispatch {
     getGames:()=>void,
-    getGameDetails:(id:string)=>void
+    getGameDetails:(id:number)=>void
 }
 type CombinedTypes = GameDetailsProps & ConnectedProps & ConnectedDispatch;
 
@@ -55,7 +55,7 @@ export class GameDetails extends React.Component<CombinedTypes, void> {
         if(this.props.selectedGame !=null){
             return (
                 <div className='GameDetails--root'>
-                    <h5 className="bread-crumb"> <a href="/">Games</a> / {this.props.selectedGame.Name}</h5>
+                    <h5 className="bread-crumb"> <Link to="/">Home</Link> / <Link to="/games">Games</Link> / {this.props.selectedGame.Name}</h5>
                     <Panel header={this.props.selectedGame.Name}>
                         <Well>
                             <Row>

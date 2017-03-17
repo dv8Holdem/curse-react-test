@@ -1,6 +1,6 @@
 import { GlobalStateGetter } from "../state/GlobalState";
 import {Game} from '../models/Game';
-import lodash from 'lodash';
+import {find} from 'lodash';
 import { Config } from "../models/Config"
 
 // Fetch Games Started
@@ -87,9 +87,9 @@ function getGameDetailSucceeded(selectedGame: Game): GetGameDetailSucceeded {
     return { type: GET_GAME_DETAIL_SUCCEEDED, selectedGame };
 }
 
-export function getGameDetails(id: string) {
+export function getGameDetails(id: number) {
     return (dispatch: Redux.Dispatch<any>, getState: GlobalStateGetter) => {
-        let game = _.find(getState().games.games, function(game) { return game.ID == id; });
+        let game = find(getState().games.games, (game:Game)=> { return game.ID == id; });
         if (game){
             dispatch(getGameDetailSucceeded(game));
         }else{

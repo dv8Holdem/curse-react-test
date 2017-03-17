@@ -8,6 +8,7 @@ export interface Game {
     SupportsAddons: boolean,
     SupportsVoice: boolean,
     GameFiles: Array<GameFile>,
-    CategorySections: Array<GameCategorySection>
+    CategorySections: Array<GameCategorySection>,
+    Order:number
 
 }

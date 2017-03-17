@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Router } from 'react-router';
-import { lodash } from 'lodash';
+import {sortBy}  from 'lodash';
 import { Game } from '../../models/Game';
 import { FormControl, Panel, Well, ControlLabel, Glyphicon } from 'react-bootstrap';
 import { Config } from "../../models/Config";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../error-message/ErrorMessage";
-import { fetchGames, FetchGamesSucceeded } from '../../actions/games'
+import { fetchGames, FetchGamesSucceeded } from '../../actions/games';
+import { Link } from 'react-router';
+import { filter } from 'lodash';
 
 export interface GameListProps extends React.Props<GameList> {
     
@@ -49,9 +51,10 @@ export class GameList extends React.Component<CombinedTypes, GameListState> {
 
     onSearchInputChange(event: Event){
         //let newList = _.filter(this.props.games, game => game.Name.contains(event.target.value.toLowerCase()));
-        let newList = _.filter(this.props.games, function(game:Game){
+        let orderedGames = sortBy(this.props.games, [(g:Game)=>{return g.Order}]);
+        let newList = filter(orderedGames, function(game:Game){
             let name = game.Name.toLowerCase();
-            return game.Name.toLowerCase().indexOf(event.target.value.toLowerCase()) >-1;
+            return game.Name.toLowerCase().indexOf(event.target.value.toLowerCase()) >-1;;
         });
 
         this.setState({
@@ -61,13 +64,22 @@ export class GameList extends React.Component<CombinedTypes, GameListState> {
     }
 
     componentDidMount() {
+
         if(!this.props.isLoaded){
             this.props.getGames().then(()=>{
-                this.setState({
-                    currentList:this.props.games
-                })
+                this.orderGames();
             });
+        }else{
+            this.orderGames();
         }
+    }
+
+    orderGames(){
+        let games = sortBy(this.props.games, [(g:Game)=>{return g.Order}]);
+        this.setState({
+            currentList: games,
+            searchQuery: ''
+        })
     }
 
     viewDetails(gameID:number){
@@ -86,7 +98,7 @@ export class GameList extends React.Component<CombinedTypes, GameListState> {
             return (
 
                 <div className='GameList--root'>
-                    <h5 className="bread-crumb">Games</h5>
+                    <h5 className="bread-crumb"><Link to="/">Home</Link> / Games</h5>
                     <Panel>
                         <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
                     </Panel>
