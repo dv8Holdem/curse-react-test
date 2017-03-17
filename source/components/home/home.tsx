@@ -18,7 +18,7 @@ export default class Home extends React.Component<void, void> {
                     </Panel>
 
                     <Panel header="Thank You!">
-                        <p>I want to thank you for allowing me to take this test. Since this is my first time with Redux, React and Typescript I learned immensely about these frameworks from this exercise.</p>
+                        <p>I want to thank you for allowing me to take this test. Since this is my first time with Redux, React and Typescript I learned a lot about these frameworks from this exercise.</p>
                     </Panel>
                 </div>
                 

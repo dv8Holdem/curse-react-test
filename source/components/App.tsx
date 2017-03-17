@@ -23,7 +23,7 @@ render() {
             <main id="main-content">
                 {this.props.children}
             </main>
-            <footer></footer>
+            <footer>&copy;2017 Dv8 Totenreich </footer>
         </div>
         );
     }
