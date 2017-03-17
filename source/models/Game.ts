@@ -2,7 +2,7 @@ import {GameFile} from './GameFile';
 import {GameCategorySection} from './GameCategorySection';
 
 export interface Game {
-    ID: string,
+    ID: number,
     Name: string,
     Slug: string,
     SupportsAddons: boolean,

@@ -66,6 +66,11 @@ footer{
     border-right:1px solid #999;
     min-height: calc(100vh - 120px);
 }
+
+.bread-crumb{
+	margin:0 0 30px 0;;
+}
+
 // Component imports
 @import '../components/games/GameList';
 @import './spinner';

@@ -23,7 +23,6 @@ export function gamesReducer(state: GamesState = initialState, action: Actions) 
                 isFetching: action.isFetching
             })
 
-        
         case FETCH_GAMES_FAILED:
             return Object.assign({}, state, {
                 isFetching: action.isFetching,
@@ -47,6 +46,5 @@ export function gamesReducer(state: GamesState = initialState, action: Actions) 
                 error: action.error
             })
     }
-    console.log('state :', state)
     return state;
 }

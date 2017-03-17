@@ -1,6 +1,7 @@
 import { GlobalStateGetter } from "../state/GlobalState";
 import {Game} from '../models/Game';
 import lodash from 'lodash';
+import { Config } from "../models/Config"
 
 // Fetch Games Started
 export type FETCH_GAMES_STARTED = 'FETCH_GAMES_STARTED';
@@ -44,7 +45,8 @@ function fetchGamesFailed(error:string): FetchGamesFailed {
 export function fetchGames() {
     return (dispatch: Redux.Dispatch<any>, getState: GlobalStateGetter) => {
         dispatch(fetchGamesStarted());
-        return fetch('https://clientupdate-v6.cursecdn.com/Feed/games/v10/games.json')
+
+        return fetch(new Config().gamesDataURL())
             .then((response)=>{
                 if(!response.ok){
                     //throw error
@@ -86,12 +88,9 @@ function getGameDetailSucceeded(selectedGame: Game): GetGameDetailSucceeded {
 }
 
 export function getGameDetails(id: string) {
-    console.log("getGameDetails", id)
     return (dispatch: Redux.Dispatch<any>, getState: GlobalStateGetter) => {
         let game = _.find(getState().games.games, function(game) { return game.ID == id; });
-        console.log("getGameDetails game", game)
         if (game){
-            console.log("getGameDetails game 1", )
             dispatch(getGameDetailSucceeded(game));
         }else{
             let error = "Game Not Found";

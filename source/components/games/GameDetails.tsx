@@ -5,10 +5,10 @@ import lodash from 'lodash';
 import {Game} from '../../models/Game';
 import {GameFile} from '../../models/GameFile';
 import {GameCategorySection} from '../../models/GameCategorySection';
-
 import {Panel, Row, Col, Well, Glyphicon}  from 'react-bootstrap';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../error-message/ErrorMessage';
+import { Config } from '../../models/Config';
 
 export interface GameDetailsProps extends React.Props<GameDetails> {
     // Define any props taken by List itself.
@@ -24,23 +24,26 @@ export interface ConnectedProps {
 }
 
 export interface ConnectedDispatch {
-    getGames:()=>any,
-    isFetching:boolean,
-    getGameDetails:(id:string)=>Game
+    getGames:()=>void,
+    getGameDetails:(id:string)=>void
 }
 type CombinedTypes = GameDetailsProps & ConnectedProps & ConnectedDispatch;
 
 export class GameDetails extends React.Component<CombinedTypes, void> {
+    
+    constructor(props:any){
+        super(props);
+        this.config = new Config();
+    }
+
     componentDidMount() {
         if(this.props.isLoaded){
             this.props.getGameDetails(this.props.params.id);
         }else{
             this.props.getGames().then(()=>{
                 this.props.getGameDetails(this.props.params.id);
-                console.log('this.props.selectedGame', this.props)
             });
         }
-
     }
     
     render() {
@@ -52,11 +55,12 @@ export class GameDetails extends React.Component<CombinedTypes, void> {
         if(this.props.selectedGame !=null){
             return (
                 <div className='GameDetails--root'>
+                    <h5 className="bread-crumb"> <a href="/">Games</a> / {this.props.selectedGame.Name}</h5>
                     <Panel header={this.props.selectedGame.Name}>
                         <Well>
                             <Row>
                                 <Col md={2}>
-                                    <img src={"https://clientupdate-v6.cursecdn.com/GameAssets/"+this.props.selectedGame.ID+"/Icon128.png"} />
+                                    <img src={this.config.gameIconLargeURLTemplate(this.props.selectedGame.ID)} />
                                 </Col>
                                 <Col md={10}>
                                     <h4>Slug:{this.props.selectedGame.Slug}</h4>
@@ -80,9 +84,6 @@ export class GameDetails extends React.Component<CombinedTypes, void> {
                                     {this.props.selectedGame.CategorySections.length == 0 &&
                                         <h5>No Categories</h5>
                                     }
-
-
-
                                 </Panel>
                             </Col>
                             <Col md={6}>

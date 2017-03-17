@@ -9,12 +9,13 @@ import ErrorMessage from "../error-message/ErrorMessage";
 import { fetchGames, FetchGamesSucceeded } from '../../actions/games'
 
 export interface GameListProps extends React.Props<GameList> {
-
+    
 }
 
 export interface GameListState {
     searchQuery:string,
-    currentList:Array<Game>
+    currentList:Array<Game>,
+
 }
 
 export interface ConnectedProps {
@@ -26,7 +27,7 @@ export interface ConnectedProps {
 }
 
 export interface ConnectedDispatch {
-    getGames:()=>Promise<FetchGamesSucceeded>
+    getGames:()=>void
 }
 
 type CombinedTypes = GameListProps & ConnectedProps & ConnectedDispatch;
@@ -39,6 +40,7 @@ export class GameList extends React.Component<CombinedTypes, GameListState> {
             currentList: this.props.games
         }
 
+        this.config = new Config();
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
     }
     static contextTypes: React.ValidationMap<any> = {
@@ -68,7 +70,7 @@ export class GameList extends React.Component<CombinedTypes, GameListState> {
         }
     }
 
-    viewDetails(gameID:string){
+    viewDetails(gameID:number){
         this.context.router.push('game/'+gameID);
     }
 
@@ -82,17 +84,19 @@ export class GameList extends React.Component<CombinedTypes, GameListState> {
 
         if(this.props.isLoaded){
             return (
+
                 <div className='GameList--root'>
+                    <h5 className="bread-crumb">Games</h5>
                     <Panel>
                         <FormControl type="text" value={this.state.searchQuery} placeholder="Search Games" onChange={this.onSearchInputChange}/>
                     </Panel>
 
-                    <Panel header="Games" >
+                    <Panel header={"Results " + this.state.currentList.length} >
                         <div id="game-list-container">
                             {this.state.currentList.map((game:Game) => (
                                 <div className="game-panel-wrapper" key={game.ID}>
                                     <Panel header={game.Name} bsSize="sm" onClick={()=>this.viewDetails(game.ID)}>
-                                        <img src={"https://clientupdate-v6.cursecdn.com/GameAssets/"+game.ID+"/Icon64.png"} />
+                                        <img src={this.config.gameIconURLTemplate(game.ID)} />
                                         <ul>
                                             <li><Glyphicon glyph={game.SupportsAddons ? 'ok-circle' : 'remove-circle'}/> Addon Supported </li>
                                             <li><Glyphicon glyph={game.SupportsVoice ? 'ok-circle' : 'remove-circle'}/> Voice Supported </li>
@@ -104,7 +108,8 @@ export class GameList extends React.Component<CombinedTypes, GameListState> {
                     </Panel> 
                 </div> 
             )
-        })
+        }
+
         return (
             <div className='GameList--root'>
                 <ErrorMessage />
