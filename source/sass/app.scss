@@ -110,6 +110,13 @@ footer{
 	margin:0 0 30px 0;;
 }
 
+.test-comments{
+    width:500px;
+    margin:25px auto;
+    .panel-body p{
+        text-align: left
+    }
+}
 // Component imports
 @import '../components/games/GameList';
 @import './spinner';

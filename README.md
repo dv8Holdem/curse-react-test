@@ -22,12 +22,15 @@ Upon the completion of the game download, a listing of games should be displayed
 - Whether the game supports addons
 - Whether the game supports voice
 
+## Completed
+
 When a user clicks on an item in the listing, the app should display a view which shows the details of the game. The game detail view should include all the data from the item in listing and the following additions:
 
 - Game slug
 - List of game files names
 - List of category section names
 
+## Completed
 We've provided you with a basic structure to get you started. However, feel free to change it in any way you see fit.
 
 ## Technical
@@ -57,6 +60,7 @@ import { config } form "./../../globals";
 const projectID = 1;
 const gameIconURL = config.gameIconURLTemplate({gameID: gameID});
 ```
+## Completed
 
 ### Design
 
@@ -73,8 +77,15 @@ const gameIconURL = config.gameIconURLTemplate({gameID: gameID});
 
 ## Bonus, Not Required
 
+## Did not have time to learn Jest
 - Implement state and component testing using Jest
+
+## Completed
 - Implement game search functionality
+
+## Did not have time
 - Implement functionality to periodically re-download the game data file (in case it has updated)
+
+## Completed
 - Provide details on choices on UI layout
 
