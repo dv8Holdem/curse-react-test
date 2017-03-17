@@ -13,27 +13,32 @@ export interface GameListProps extends React.Props<GameList> {
 
 }
 
+export interface GameListState {
+    searchQuery:string,
+    currentList:Array<Game>
+}
+
 export interface ConnectedProps {
-    games: Object,
+    games: Array<Game>,
     isFetching: boolean,
     error: string,
     isLoaded: boolean,
-    selectedGame: Object
+    selectedGame: Game,
 }
 
 export interface ConnectedDispatch {
-    getGames:()=>void,
-    isFetching:()=>void
+    getGames:(),
+    isFetching:()
 }
 
 type CombinedTypes = GameListProps & ConnectedProps & ConnectedDispatch;
 
-export class GameList extends React.Component<CombinedTypes, void> {
+export class GameList extends React.Component<CombinedTypes, GameListState> {
     constructor(props){
         super(props);
         this.state = {
-            searchQuery:'',
-            currentList:this.props.games
+            searchQuery: '',
+            currentList: this.props.games
         }
 
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
@@ -42,9 +47,9 @@ export class GameList extends React.Component<CombinedTypes, void> {
         router: React.PropTypes.object
     };
 
-    onSearchInputChange(event){
+    onSearchInputChange(event: Event){
         //let newList = _.filter(this.props.games, game => game.Name.contains(event.target.value.toLowerCase()));
-        let newList = _.filter(this.props.games, function(game){
+        let newList = _.filter(this.props.games, function(game:Game){
             let name = game.Name.toLowerCase();
             return game.Name.toLowerCase().indexOf(event.target.value.toLowerCase()) >-1;
         });

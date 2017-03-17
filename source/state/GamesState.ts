@@ -1,9 +1,9 @@
 import { Game } from "../models/Game";
 
 export interface GamesState {
-    games: Game[],
+    games: Array<Game>,
     isFetching: boolean,
     error: string,
     isLoaded: boolean,
-    selectedGame: Object,
+    selectedGame: Game,
 }

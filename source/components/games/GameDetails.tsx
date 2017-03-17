@@ -1,11 +1,14 @@
 //game details
 import * as React from 'react';
 import { Link } from 'react-router';
-import {lodash} from 'lodash';
+import lodash from 'lodash';
 import {Game} from '../../models/Game';
-import { Panel, Row, Col, Well, Glyphicon } from 'react-bootstrap';
-import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../error-message/ErrorMessage";
+import {GameFile} from '../../models/GameFile';
+import {GameCategorySection} from '../../models/GameCategorySection';
+
+import {Panel, Row, Col, Well, Glyphicon}  from 'react-bootstrap';
+import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../error-message/ErrorMessage';
 
 export interface GameDetailsProps extends React.Props<GameDetails> {
     // Define any props taken by List itself.
@@ -68,7 +71,7 @@ export class GameDetails extends React.Component<CombinedTypes, void> {
                                 <Panel header="Category">
                                     {this.props.selectedGame.CategorySections.length > 0 &&
                                         <ul className="cat-file-list">
-                                            {this.props.selectedGame.CategorySections.map((cat) => (
+                                            {this.props.selectedGame.CategorySections.map((cat:GameCategorySection) => (
                                                 <li  key={cat.ID}>{cat.Name}</li>
                                             ))}
                                         </ul>
@@ -85,7 +88,7 @@ export class GameDetails extends React.Component<CombinedTypes, void> {
                                 <Panel header="Game Files">
                                     {this.props.selectedGame.GameFiles.length > 0 &&
                                         <ul className="cat-file-list">
-                                            {this.props.selectedGame.GameFiles.map((file) => (
+                                            {this.props.selectedGame.GameFiles.map((file:GameFile) => (
                                                 <li key={file.Id}>{file.FileName}</li>
                                             ))}
                                         </ul>
